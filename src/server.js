@@ -17,9 +17,11 @@ wsServer.on("connection", (socket) => {
   socket.onAny((event) => {
     console.log(`Socket event: ${event}`);
   });
+  // Runs everytime when enter_room has been received.
   socket.on("enter_room", (roomName, done) => {
     socket.join(roomName);
     done();
+    socket.to(roomName).emit("welcome");
   });
 });
 
